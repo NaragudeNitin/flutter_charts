@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_charts/widgets/buttonwidget.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class CartesianChartWidget extends StatefulWidget {
@@ -24,23 +25,30 @@ class _CartesianChartWidgetState extends State<CartesianChartWidget> {
       appBar: AppBar(
         title: const Text("Cartesian Charts"),
       ),
-      body: Container(
-        height: 500,
-        margin: const EdgeInsets.all(10),
-        child: SfCartesianChart(
-          legend: Legend(isVisible: true),
-          title: ChartTitle(text: "Sales Data"),
-          series: [
-            LineSeries<SalesData, int>(
-              dashArray: <double>[10,5],
-              legendItemText: 'Sales',
-              dataSource: chartData,
-              pointColorMapper: (SalesData sales, _) => sales.color,
-              xValueMapper: (SalesData sales, _) => sales.year,
-              yValueMapper:  (SalesData sales, _) => sales.sales, 
+      body: Column(
+        children: [
+          Container(
+            height: 400,
+            margin: const EdgeInsets.all(10),
+            child: SfCartesianChart(
+              backgroundColor: Colors.black,
+              legend: Legend(isVisible: true),
+              title: ChartTitle(text: "Sales Data"),
+              series: [//area//waterfall//bar//column
+                LineSeries<SalesData, int>(
+                  dashArray: <double>[10,5],
+                  legendItemText: 'Sales',
+                  dataSource: chartData,
+                  pointColorMapper: (SalesData sales, _) => sales.color,
+                  xValueMapper: (SalesData sales, _) => sales.year,
+                  yValueMapper:  (SalesData sales, _) => sales.sales, 
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 10,),
+          const ButtonWidet()
+        ],
       ),
     );
   }
